@@ -1,33 +1,42 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema(
-  {
+const userSchema = new mongoose.Schema( { 
     title: {
-      type: String,
-      required: "title is required",
-      enum: ["Mr", "Mrs", "Miss"],
+        type : String,
+        required : [true , "Please , enter title"],
+        enum : ["Mr", "Mrs", "Miss"]
     },
-    name: { type: String, required: "name is required" },
-    phone: { type: String, required: "phone is required" },
+    name: {
+        type : String,
+        required : [true , "Please , enter name"] 
+    },
+    phone: {
+        type : String, 
+        required : [true , "Please , enter phone"] ,
+        unique : true 
+    },
     email: {
-      type: String,
-      unique: true,
-      lowercase: true,
-      required: "email is required",
-    },
+        type : String,
+        required : [true , "Please , enter email"] ,  
+        unique : true 
+    }, 
     password: {
-      type: String,
-      require: "password is required",
-      minlength: 8,
-      maxlength: 15,
-    },
+        type : String, 
+        required : [true , "Please , enter password"] ,
+        minlength : 8,
+        maxlength : 15
+      },
     address: {
-      street: String,
-      city: String,
-      pincode: String,
-    },
-  },
-  { timestamps: true }
-);
+      street: {
+        type : String
+      },
+      city: {
+        type : String
+      },
+      pincode: {
+        type : String
+      }
+    }
+  } , { timestamps: true });
 
-module.exports = mongoose.model("Users", UserSchema);
+module.exports = mongoose.model('user', userSchema)
